@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>'CCTV Mosaic'</title>
+  <link rel="icon" href="resources/icon.svg" />
+  <link rel="stylesheet" href="styles/main.css" />
+  <meta name="x-icue-property" content="relayHost" data-label="'Relay address'" data-type="textfield" data-default="'127.0.0.1'" />
+  <meta name="x-icue-property" content="relayPort" data-label="'Relay port'" data-type="textfield" data-default="'1984'" />
+  <meta name="x-icue-property" content="cameraLabels" data-label="'Camera names (comma-separated)'" data-type="textfield" data-default="'Voorgevel (D6), Zijgevel (D2), Leefruimte (D8), Tuin (D4), Keuken (D7), Boven (D5)'" />
+  <meta name="x-icue-property" content="mosaicSources" data-label="'Mosaic aliases or JPEG URLs'" data-type="textfield" data-default="'voorgevel, zijgevel, leefruimte, tuin, keuken, boven'" />
+  <meta name="x-icue-property" content="focusSources" data-label="'Focus aliases or JPEG URLs'" data-type="textfield" data-default="'voorgevel_hd, zijgevel_hd, leefruimte_hd, tuin_hd, keuken_hd, boven_hd'" />
+  <meta name="x-icue-property" content="liveSources" data-label="'Focus MJPEG URLs (optional)'" data-type="textfield" data-default="''" />
+  <meta name="x-icue-property" content="tileCount" data-label="'Camera tiles'" data-type="combobox" data-values="['4','6']" data-default="'6'" />
+  <meta name="x-icue-property" content="refreshSeconds" data-label="'Snapshot interval'" data-type="slider" data-min="1" data-max="2" data-step="1" data-default="2" data-unit-label="'s'" />
+  <meta name="x-icue-property" content="focusSeconds" data-label="'Return to mosaic'" data-type="slider" data-min="5" data-max="600" data-step="5" data-default="60" data-unit-label="'s'" />
+  <meta name="x-icue-property" content="accentColor" data-label="'Accent color'" data-type="color" data-default="'#62e1bd'" />
+  <script type="application/json" id="x-icue-groups">
+    [
+      {"title":"'Cameras'","properties":["relayHost","relayPort","cameraLabels","mosaicSources","focusSources","liveSources","tileCount","refreshSeconds","focusSeconds"]},
+      {"title":"'Appearance'","properties":["accentColor"]}
+    ]
+  </script>
+</head>
+<body>
+  <main>
+    <div class="toolbar">
+      <button id="back" type="button" hidden>Back</button>
+      <h1>CCTV Mosaic</h1>
+      <button id="privacy" type="button">Privacy</button>
+    </div>
+    <div id="cameras" class="cameras"></div>
+    <button id="resume" type="button" hidden>
+      <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+        <rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3m-4 4v3"/>
+      </svg>
+      Resume cameras
+    </button>
+  </main>
+  <script src="scripts/main.js"></script>
+</body>
+</html>
