@@ -73,7 +73,7 @@ function readSettings() {
   };
 }
 
-function showCamera(camera, focused, onTap) {
+function showCamera(camera, focused, onTap, startDelay = 0) {
   const tile = document.createElement('button');
   tile.className = 'tile';
   tile.type = 'button';
@@ -124,8 +124,9 @@ function showCamera(camera, focused, onTap) {
         return;
       }
       cancelImage(img);
-      state('offline', 'No signal');
       errors += 1;
+      if (!current || errors >= 3) state('offline', 'No signal');
+      else state('retrying');
       retry = setTimeout(() => load(source), Math.min(30000, interval * 2 ** Math.min(errors, 8)));
     }
 
@@ -143,12 +144,13 @@ function showCamera(camera, focused, onTap) {
     img.onerror = failed;
     const url = new URL(source);
     url.searchParams.set('_', Date.now());
-    deadline = setTimeout(failed, continuous ? 3500 : 5000);
+    deadline = setTimeout(failed, 15000);
     img.src = url.href;
   }
 
   state('loading', 'Connecting');
   if (focused && camera.live) load(camera.live, true);
+  else if (startDelay) retry = setTimeout(() => load(camera.mosaic), startDelay);
   else load(focused ? camera.snapshot : camera.mosaic);
 
   return () => {
@@ -186,7 +188,7 @@ function render() {
     cameraIndex = index;
     render();
     back.focus();
-  }));
+  }, index * activeSettings.interval / cameras.length));
 }
 
 function returnToMosaic() {

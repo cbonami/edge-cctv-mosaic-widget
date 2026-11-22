@@ -3,7 +3,7 @@
   "id": "com.cbona.cctv-mosaic",
   "name": "CCTV Mosaic",
   "description": "Local camera mosaic",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "preview_icon": "resources/icon.svg",
   "min_app_version": "5.54",
   "min_framework_version": "1.10.0",

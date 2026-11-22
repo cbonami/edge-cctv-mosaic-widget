@@ -21,6 +21,7 @@ button:focus-visible { outline: 2px solid var(--accent); outline-offset: -3px; }
 .label { white-space: nowrap; text-overflow: ellipsis; overflow: hidden; }
 .dot { background: #a3adb7; width: 8px; height: 8px; border-radius: 50%; flex: none; }
 .tile[data-state="live"] .dot { background: var(--accent); }
+.tile[data-state="retrying"] .dot { background: #edb56e; }
 .tile[data-state="offline"] .dot { background: #f18c7e; }
 .status { position: relative; padding: 4px 8px; border-radius: 4px; background: #0c1116eb; }
 body.blanked main { background: #000; display: block; padding: 0; }
